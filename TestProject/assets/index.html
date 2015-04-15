@@ -1,0 +1,79 @@
+<!-- AUI Framework -->
+<!DOCTYPE html>
+    <html>
+    <head>
+ 	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	
+    <script src="https://code.jquery.com/jquery.js"></script> 
+    
+	<script>
+	   
+	   var $j = jQuery.noConflict();
+	   $j(document).ready(function() {
+			getData();
+	   });
+	   
+	   function getData(){
+		
+			var urlData = "https://api.github.com/repos/rails/rails/commits";   
+			
+			$j.ajax({			
+				type: 'GET',
+				url: urlData,
+				data:'',
+				success: function(obj)
+				{
+					var array = jQuery.makeArray( obj );
+					var len = array.length;
+					var html = "";
+					
+					for (var i = 0; i < len; i++) {
+						$j.each( array[i], function( key, value ) {
+							if(key == "commit")
+							{
+								html += "<div style='background-color:#F1F1F1; margin:10px; border;border-bottom:thin;padding:10px;'>";	
+								$j.each( value, function( keyname, valuedata ) {
+									
+									if(keyname == "committer")
+									{
+										
+										$j.each( valuedata, function( finalkey, finalvalue ) {
+											console.log(finalkey+'='+finalvalue);
+											html += "<p><b>"+finalkey.capitalize()+":&nbsp;</b>"+finalvalue+"</p>";
+										});	
+										
+									}
+									if(keyname == "message")
+									{
+										html += "<p><b>"+keyname.capitalize()+":&nbsp;</b>"+valuedata+"</p>";
+									}
+									
+								});
+								html += "</div>";
+							}
+						});
+					};
+
+					
+					$j('#dataTable').append(html);
+					return true;
+				}
+			});	
+	   }
+	   
+	   String.prototype.capitalize = function() {
+			return this.charAt(0).toUpperCase() + this.slice(1);
+		}
+       
+
+    </script>
+
+    <body>
+        
+	<div id="dataTable"></div>
+
+    </body>
+</html>

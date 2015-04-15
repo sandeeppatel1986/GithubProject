@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TestProject</string>
+	<string name="base_url">https://api.github.com/repos/rails/rails/commits</string>
+	<string name="network_error">Network not available.</string>
+	<string name="commiter_name">Commiter Name</string>
+	<string name="commite_date">Commit Date</string>
+	<string name="commite_message">Commit Message</string>
+	<string name="module_title_web">Repo Commit List(WebView)</string>
+	<string name="module_title_native">Repo Commit List(Native)</string>
+	<string name="module_title">Repository View List</string>
+</resources>
